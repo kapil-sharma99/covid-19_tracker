@@ -1,8 +1,26 @@
 import './App.css';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {FormControl, Select, MenuItem, } from '@material-ui/core'
 
 function App() {
+	const [countries, setCountries] = useState([]);
+	//Use effect runs a peice of code in given condition
+	useEffect(() => {
+		const getCountriesData = async () => {
+			await fetch("https://disease.sh/v3/covid-19/countries")
+			.then((response) => response.json())
+			.then((data) => {
+				const countries = data.map((country) => (
+					{
+						name: country.country, //United states of America, India, United Kingdom
+						value: country.countryInfo.iso2, //like IND, USA, UK
+					}
+				));
+				setCountries(countries);
+			});
+		};
+		getCountriesData();
+	}, []);
   return (
     <div className="app">
 			{/* ---------- Header ---------- */}
@@ -10,10 +28,14 @@ function App() {
 				<h1>Covid-19 Tracker</h1>
 				<FormControl className="app__dropdown">
 					<Select variant="outlined" value="abc">
-						<MenuItem value="worldwide">WorldWide</MenuItem>
+						{/* Loop through all the countires and show the drowdown */}
+						{countries.map(country => (
+							<MenuItem value={country}>{country}</MenuItem>
+						))}
+						{/* <MenuItem value="worldwide">WorldWide</MenuItem>
 						<MenuItem value="worldwide">Option 2</MenuItem>
 						<MenuItem value="worldwide">Option 3</MenuItem>
-						<MenuItem value="worldwide">Option 4</MenuItem>
+						<MenuItem value="worldwide">Option 4</MenuItem> */}
 					</Select>
 				</FormControl>
 			</div>
