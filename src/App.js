@@ -20,13 +20,19 @@ function App() {
     };
     getCountriesData();
   }, []);
+
+  const onCountryChange = async (event) => {
+    const countryCode = event.target.value;
+    setCountry(countryCode);
+  };
+
   return (
     <div className="app">
       {/* ---------- Header ---------- */}
       <div className="app__header">
         <h1>Covid-19 Tracker</h1>
         <FormControl className="app__dropdown">
-          <Select variant="outlined" value={country}>
+          <Select variant="outlined" onChange={onCountryChange} value={country}>
             {/* Loop through all the countires and show the drowdown */}
             <MenuItem value="worldwide">WorldWide</MenuItem>
             {countries.map((country) => (
@@ -42,6 +48,7 @@ function App() {
       {/* ----- Title + Select input dropdown field ----- */}
 
       {/* ---------- Info boxes * 3 ---------- */}
+      <div className="app__stats"></div>
 
       {/* ---------- Table ---------- */}
 
