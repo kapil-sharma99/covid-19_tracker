@@ -49,9 +49,9 @@ function App() {
       {/* ----- Title + Select input dropdown field ----- */}
 
       {/* ---------- Info boxes * 3 ---------- */}
-      <InfoBox title="Coronavirus Cases" />
-      <InfoBox title="Recovered" />
-      <InfoBox title="Deaths" />
+      <InfoBox title="Coronavirus Cases" total={2000} cases={123} />
+      <InfoBox title="Recovered" total={3000} cases={123} />
+      <InfoBox title="Deaths" total={4000} cases={123} />
 
       <div className="app__stats"></div>
 
