@@ -76,9 +76,21 @@ function App() {
 
         {/* ---------- Info boxes * 3 ---------- */}
         <div className="app__stats">
-          <InfoBox title="Coronavirus Cases" total={2000} cases={123} />
-          <InfoBox title="Recovered" total={3000} cases={123} />
-          <InfoBox title="Deaths" total={4000} cases={123} />
+          <InfoBox
+            title="Coronavirus Cases"
+            total={countryInfo.cases}
+            cases={countryInfo.todayCases}
+          />
+          <InfoBox
+            title="Recovered"
+            total={countryInfo.recovered}
+            cases={countryInfo.todayRecovered}
+          />
+          <InfoBox
+            title="Deaths"
+            total={countryInfo.deaths}
+            cases={countryInfo.todayDeaths}
+          />
         </div>
 
         {/* ---------- Map ---------- */}
