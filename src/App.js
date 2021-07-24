@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import Table from "./Table";
 import {
   FormControl,
   Select,
@@ -14,6 +15,7 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -33,6 +35,7 @@ function App() {
             name: country.country, //United states of America, India, United Kingdom
             value: country.countryInfo.iso2, //like IND, USA, UK
           }));
+          setTableData(data);
           setCountries(countries);
         });
     };
