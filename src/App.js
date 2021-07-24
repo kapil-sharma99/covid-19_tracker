@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
+import { sortData } from "./util";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -35,7 +36,8 @@ function App() {
             name: country.country, //United states of America, India, United Kingdom
             value: country.countryInfo.iso2, //like IND, USA, UK
           }));
-          setTableData(data);
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
@@ -55,7 +57,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setCountry(countryCode);
-        setCountryInfo(data);
+        setCountryInfo(() => ({ ...data }));
       });
   };
 
