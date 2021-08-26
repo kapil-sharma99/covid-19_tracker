@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { numeral, tooltips } from "numeral";
+import { numeral } from "numeral";
 
 const options = {
   legend: {
     display: false,
   },
   elements: {
-    points: {
+    point: {
       radius: 0,
     },
   },
@@ -17,7 +17,7 @@ const options = {
     intersect: false,
     callbacks: {
       label: function (tooltipItem, data) {
-        return numeral(tooltips.value).format("+0,0");
+        return numeral(tooltipItem.value).format("+0,0");
       },
     },
   },
@@ -31,14 +31,14 @@ const options = {
         },
       },
     ],
-    yAxis: [
+    yAxes: [
       {
         gridLines: {
           display: false,
         },
         ticks: {
           callback: function (value, index, values) {
-            return numeral(values).format("0a");
+            return numeral(value).format("0a");
           },
         },
       },
@@ -63,7 +63,7 @@ const buildChartData = (data, casesTypes = "cases") => {
   return chartData;
 };
 
-function LineGraph() {
+function LineGraph({ casesType = "cases" }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -76,12 +76,13 @@ function LineGraph() {
         });
     };
     fetchData();
-  }, []);
+  }, [casesType]);
 
   return (
     <div>
       {data?.length > 0 && (
         <Line
+          options={options}
           data={{
             datasets: [
               {
@@ -91,7 +92,6 @@ function LineGraph() {
               },
             ],
           }}
-          options={options}
         />
       )}
     </div>
