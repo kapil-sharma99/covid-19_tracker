@@ -25,7 +25,7 @@ function App() {
       .then((data) => {
         setCountryInfo(data);
       });
-  });
+  }, [countries]);
 
   //Use effect runs a peice of code in given condition
   useEffect(() => {
@@ -76,7 +76,7 @@ function App() {
             >
               {/* Loop through all the countires and show the drowdown */}
               <MenuItem value="worldwide">WorldWide</MenuItem>
-              {countries.map((country) => (
+              {countries.map(country => (
                 <MenuItem value={country.value}>{country.name}</MenuItem>
               ))}
               {/* <MenuItem value="worldwide">WorldWide</MenuItem>
